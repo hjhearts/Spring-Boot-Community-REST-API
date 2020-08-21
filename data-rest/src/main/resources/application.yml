@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 1234
+    url: jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC&useSSL=false
+  data:
+    rest:
+      base-path: /api
+      default-page-size: 10
+      max-page-size: 10
+server:
+  port: 8081
