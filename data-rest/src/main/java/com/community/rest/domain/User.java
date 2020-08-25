@@ -1,6 +1,7 @@
 package com.community.rest.domain;
 
 import com.community.rest.domain.enums.SocialType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,11 +17,12 @@ import java.time.LocalDateTime;
 public class User implements Serializable {
     @Id
     @Column
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
     @Column
     private String name;
     @Column
+    @JsonIgnore
     private String password;
     @Column
     private String email;
