@@ -9,10 +9,12 @@ import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resources;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
+import java.io.UnsupportedEncodingException;
+import java.net.*;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -66,5 +68,15 @@ public class BoardRestController {
         return pagedResources;
     }
 
-
+    @GetMapping("/corona")
+    public ResponseEntity<?> getCorona() throws UnsupportedEncodingException,  URISyntaxException {
+        StringBuilder urlBuilder = new StringBuilder("http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson"); /*URL*/
+        RestTemplate template = new RestTemplate();
+        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLDecoder.decode(URLEncoder.encode("bzHeLyHn1eU7Zd0Vcw3%2BB8UWymKAxuQxo%2Fq5la9XlJvHKOStYuIySV44whfV17WSKlJWWE8EyP5x6vWsRxpEdg%3D%3D", "UTF-8"), "UTF-8"));
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        URI uri = new URI(urlBuilder.toString());
+        HttpEntity entity = new HttpEntity("parameters", httpHeaders);
+        return new ResponseEntity<>(template.getForObject(uri, String.class), HttpStatus.OK);
+    }
 }
