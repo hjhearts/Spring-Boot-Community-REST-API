@@ -1,5 +1,6 @@
 package com.community.rest;
 
+import com.community.rest.event.BoardEventHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +30,7 @@ public class RestWebApplication {
     static class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Bean
-        InMemoryUserDetailsManager userDetailsManager(){
+        InMemoryUserDetailsManager userDetailsManager() {
             User.UserBuilder commonUser = User.withUsername("commonUser").password("{noop}common").roles("User");
             User.UserBuilder havi = User.withUsername("havi").password("{noop}test").roles("USER", "ADMIN");
             List<UserDetails> userDetailsList = new ArrayList<>();
