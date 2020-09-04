@@ -42,6 +42,7 @@ project(':data-rest'){
         compile('org.springframework.boot:spring-boot-starter-data-rest'){
             exclude module: "jackson-databind"
         }
+        compile('org.springframework.data:spring-data-rest-hal-browser')
     }
 }
 
